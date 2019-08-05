@@ -24,12 +24,13 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "lvgl/lvgl.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+static lv_disp_buf_t disp_buf;
+static lv_color_t buf[LV_HOR_RES_MAX * 10];		// Declare a buffer for 10 lines
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -104,7 +105,10 @@ int main(void)
     Error_Handler();
   }
   /* USER CODE BEGIN 2 */
-
+  //lv_disp_buf_init(&disp_buf, buf, buf2, LV_HOR_RES_MAX * 10);    //Initialize the display buffer
+  lv_disp_buf_init(&disp_buf, buf, NULL, LV_HOR_RES_MAX * 10);    //Initialize the display buffer
+  //lv_log_register_print_cb(my_print);
+  lv_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -114,6 +118,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  // Eventos da GUI LittleVG
+	  lv_task_handler();
   }
   /* USER CODE END 3 */
 }
